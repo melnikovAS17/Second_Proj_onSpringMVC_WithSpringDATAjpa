@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>My app</title>
+    <style>
+        input[type="submit"] {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color:#4CAF50;
+        }
+        body,div {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+
+<body>
+Person info
+<p th:text="${person.getId()}"></p>
+<p th:text="${person.getName()}"></p>
+<p th:text="${person.getEmail()}"></p>
+<p th:text="${person.getDateOfBirth()}"></p>
+<hr>
+<div th:if="${emptyList}">
+    <label >The reader did not take any book</label>
+</div>
+<div th:if="${bookList}">
+    <label>The reader is currently reading these books</label>
+    <div th:each="book:${bookList}">
+        <a style="color: orangered" th:style="${book.getBookIsOverdue()} ? 'color:red':'color:black'" th:href="@{/books/{id}(id = ${book.getId()})}" th:text="${book.getTitle()+ ', ' + book.getAuthor()+', '+book.getYearOfCreated()}">user</a>
+    </div>
+</div>
+<br>
+<form  th:action="@{/people/{id}/edit(id = ${person.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+<br>
+<form th:method="DELETE" th:action="@{/people/{id}(id = ${person.getId()})}">
+    <input type="submit" value="Delete">
+</form>
+<br>
+<form th:method="GET" th:action="@{/people}">
+    <input type="submit" value="People list"/>
+</form>
+<br>
+<form th:action="@{/main}">
+    <input type="submit" value="On start page">
+</form>
+<br>
+</body>
+</html>

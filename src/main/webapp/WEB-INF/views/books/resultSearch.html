@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>My app</title>
+    <style>
+        input[type="submit"] {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color:#4CAF50;
+        }
+        body,div {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+
+<body>
+Result of searching
+<div th:if="${bookList}">
+<div th:each="book:${bookList}">
+    <a th:href="@{/books/{id}(id = ${book.getId()})}" th:text="${book.getTitle()}">user</a>
+</div>
+</div>
+<div th:if="${emptyList}">
+    <label th:text="${emptyList}">s</label>
+</div>
+<br>
+<hr>
+<form  th:action="@{/books/search}">
+    <input type="submit" value="Search page"/>
+</form>
+<br>
+<form th:method="GET" th:action="@{/people}">
+    <input type="submit" value="People list"/>
+</form>
+</form>
+</body>
+</html>

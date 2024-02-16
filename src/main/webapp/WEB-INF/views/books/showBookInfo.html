@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>My app</title>
+    <style>
+        input[type="submit"] {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color:#4CAF50;
+        }
+        body,div {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+
+<body>
+Book info
+<p th:text="${book.getId()}"></p>
+<p th:text="${book.getTitle()}"></p>
+<p th:text="${book.getAuthor()}"></p>
+<p th:text="${book.getYearOfCreated()}"></p>
+<hr>
+<div th:if="${people}">
+    <label for="person">Book is free - choose a reader</label>
+    <form th:method="PATCH" th:action="@{/books/{id}/assign(id = ${book.getId()})}">
+        <select  th:object="${person}"  th:field="*{id}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}">s</option>
+        </select>
+        <input type="submit" value="Appoint!">
+    </form>
+</div>
+<div th:if="${getPerson}">
+    <label th:text="${getPerson}">s</label><label> -  has the book now </label>
+    <form th:method="PATCH" th:action="@{/books/{id}/cancel(id = ${book.getId()})}">
+        <input type="submit" value="Cancel!">
+    </form>
+</div>
+<br>
+<form  th:action="@{/books/{id}/edit(id = ${book.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+<br>
+<form th:method="DELETE" th:action="@{/books/{id}(id = ${book.getId()})}">
+    <input type="submit" value="Delete">
+</form>
+<br>
+<form th:method="GET" th:action="@{/books}">
+    <input type="submit" value="Book list"/>
+</form>
+<br>
+<form th:action="@{/main}">
+    <input type="submit" value="On start page">
+</form>
+<br>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            /*Tomcat не подгружает изображение*/
+            background-image: url(images/image.jpg); /* путь к вашему фоновому изображению (не загружается на сервер, для этого нужно менять конфиг Tomcat, и создавать директорию хранения изоб-й в бд или у себя на диске)*/
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container {
+            width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+        </style>
+</head>
+<body>
+<div class="container">
+    <h1>Main Page</h1>
+    <div class="buttons">
+        <a th:href="@{/books/pageable}" class="button">Books page</a>
+        <a th:href="@{/people}" class="button">People page</a>
+        <a th:href="@{/books/search}" class="button">Search page</a>
+    </div>
+</div>
+</body>
+</html>

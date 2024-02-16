@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Find book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+<form th:method="GET" th:action="@{/books}" >
+    <label for="page">Enter amount of page</label>
+    <input th:name="page" type="text" id="page"/>
+    <br>
+    <label for="books_per_page">Enter amount of books per page</label>
+    <input th:name="books_per_page" type="text" id="books_per_page"/>
+    <br>
+    <label for="sort">Sort</label>
+    <input th:type="radio" th:name="sort_by_year" th:value="true" id="sort"/>
+    <br>
+    <label for="NotSorted">Not Sorted</label>
+    <input th:type="radio" th:name="sort_by_year" th:value="false" id="NotSorted"/>
+    <br>
+    <input type="submit" value="Get book list">
+</form>
+<br>
+
+</body>
+</html>
